@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const { forOwn } = require('lodash');
 
 /*
  |--------------------------------------------------------------------------

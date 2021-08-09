@@ -1,22 +1,16 @@
 # AW-Studio VITT
 
-The installer für The AW-Studio VITT Stack
+VITT the AW-Studio project bootstrapper for Laravel applications including
 
-- Vue.js
-- Inertia.js
-- Tailwind
-- Typescript
-
+-   Vue.js
+-   Inertia.js
+-   Tailwind
+-   Typescript
 
 ## Installation
 
 ```bash
 composer require aw-studio/vitt
-```
-
-## Setup
-
-```bash
 php artisan vitt:install
 npm install
 npm run dev

@@ -9,7 +9,7 @@ class HomeController
     public function __invoke()
     {
         return Inertia::render('Home/Home', [
-            'message' => 'Hello VITT!',
+            'message' => 'VITT',
         ]);
     }
 }

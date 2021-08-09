@@ -38,15 +38,31 @@ class InstallCommand extends Command
      */
     public function handle()
     {
+        $this->info(' _    __________________');
+        $this->info('| |  / /  _/_  __/_  __/');
+        $this->info('| | / // /  / /   / /   ');
+        $this->info('| |/ // /  / /   / /    ');
+        $this->info('|___/___/ /_/   /_/     ');
+
+        // Delete welcome view and replace with app
         $this->handleBladeFiles();
+
+        // Publish js and css resources
         $this->handleAssetFiles();
-        $this->handleConfFiles();
+
+        // publish root dir config files
+        $this->handleRootFiles();
+
+        // publish home controller
         $this->handleControllers();
+
+        // update package.json
         $this->installNpmPackages();
 
+        // install inertia middleware
         $this->callSilently('inertia:middleware');
 
-        $this->comment('Please execute "npm install".');
+        $this->comment("\nPlease execute 'npm install & npm run dev'.\n");
     }
 
     /**
@@ -80,13 +96,13 @@ class InstallCommand extends Command
     }
 
     /**
-     * Handle config files.
+     * Handle root files.
      *
      * @return void
      */
-    public function handleConfFiles()
+    public function handleRootFiles()
     {
-        $this->callSilently('vendor:publish', ['--tag' => 'vitt-conf', '--force' => true]);
+        $this->callSilently('vendor:publish', ['--tag' => 'vitt-root', '--force' => true]);
     }
 
     /**
@@ -97,6 +113,16 @@ class InstallCommand extends Command
     public function handleControllers()
     {
         $this->callSilently('vendor:publish', ['--tag' => 'vitt-controllers', '--force' => true]);
+
+        if ($url = env('APP_URL')) {
+            $data = "
+mix.browserSync({
+    proxy: '$url',
+    notify: false
+});";
+
+            File::append(base_path('webpack.mix.js'), $data);
+        }
     }
 
     /**
