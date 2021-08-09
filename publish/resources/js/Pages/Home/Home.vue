@@ -4,9 +4,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import DefaultLayout from '../../Layouts/Default.vue';
 export default defineComponent({
-    layout: DefaultLayout,
     props: {
         message: {
             type: String as PropType<string>,
