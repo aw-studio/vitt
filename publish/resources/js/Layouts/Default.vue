@@ -1,8 +1,5 @@
 <template>
-    <Head>
-        <title>VITT - Home</title>
-        <meta name="description" content="The is the VITT home page" />
-    </Head>
+    <AppHead />
     <Header />
     <main>
         <slot />
@@ -12,10 +9,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { Head } from '@inertiajs/inertia-vue3';
 
-import Header from './../Partials/Header.vue';
-import Footer from './../Partials/Footer.vue';
+import Header from './components/Header.vue';
+import Footer from './components/Footer.vue';
 
 export default defineComponent({
     components: {

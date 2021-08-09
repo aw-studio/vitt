@@ -4,7 +4,7 @@ import {
     plugin as InertiaPlugin,
 } from '@inertiajs/inertia-vue3';
 import DefaultLayout from './Layouts/Default.vue';
-import UiComponents from './ui'
+import Components from './components'
 
 const el = document.getElementById('app');
 
@@ -26,11 +26,11 @@ if (el instanceof HTMLElement) {
     });
     
     /**
-     * Vue plugins
+     * Load Plugins
      * 
      */
     app.use(InertiaPlugin);
-    app.use(UiComponents);
+    app.use(Components);
     
     /**
      * Mount the app in the app container

@@ -1,5 +1,7 @@
 <template>
-    <h1 class="text-2xl text-blue-900">{{ message }}</h1>
+    <AppHead title="Home" />
+    <h1 class="text-xl text-blue-900">{{ message }}</h1>
+    <UiButton>Hello World!</UiButton>
 </template>
 
 <script lang="ts">
