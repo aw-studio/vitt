@@ -7,12 +7,15 @@ module.exports = {
         },
     },
     theme: {
+        container: {
+            center: true,
+        },
         borderRadius: {
-            full: '9999px',
             xs: '6px',
             sm: '11px',
             md: '15px',
             lg: '19px',
+            full: '9999px',
         },
         colors: {
             white: 'white',
