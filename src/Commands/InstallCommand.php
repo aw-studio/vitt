@@ -81,20 +81,6 @@ class InstallCommand extends Command
      *
      * @return void
      */
-    public function handleLitstackFiles()
-    {
-        $this->callSilently('vendor:publish', ['--tag' => 'vitt-blade', '--force' => true]);
-
-        if (File::exists(resource_path('views/welcome.blade.php'))) {
-            File::delete(resource_path('views/welcome.blade.php'));
-        }
-    }
-
-    /**
-     * Handle Blade files.
-     *
-     * @return void
-     */
     public function handleBladeFiles()
     {
         $this->callSilently('vendor:publish', ['--tag' => 'vitt-blade', '--force' => true]);
@@ -181,6 +167,16 @@ mix.browserSync({
                 'vue-loader'              => '^16.4.1',
             ] + $packages;
         });
+    }
+
+    /**
+     * Handle Litstack files.
+     *
+     * @return void
+     */
+    public function handleLitstackFiles()
+    {
+        $this->callSilently('vendor:publish', ['--tag' => 'vitt-litstack', '--force' => true]);
     }
 
     /**
