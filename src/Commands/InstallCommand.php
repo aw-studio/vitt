@@ -44,11 +44,16 @@ class InstallCommand extends Command
         $this->info('| |/ // /  / /   / /    ');
         $this->info('|___/___/ /_/   /_/     ');
 
+        $litstack = false;
+        if ($this->confirm('Install litstack preset?')) {
+            $litstack = true;
+        }
+
         // Delete welcome view and replace with app
         $this->handleBladeFiles();
 
         // Publish js and css resources
-        $this->handleAssetFiles();
+        $this->handleAssetFiles($litstack);
 
         // publish root dir config files
         $this->handleRootFiles();
@@ -57,7 +62,7 @@ class InstallCommand extends Command
         $this->handleControllers();
 
         // update package.json
-        $this->installNpmPackages();
+        $this->installNpmPackages($litstack);
 
         // install inertia middleware
         $this->callSilently('inertia:middleware');
@@ -130,9 +135,19 @@ mix.browserSync({
      *
      * @return void
      */
-    public function installNpmPackages()
+    public function installNpmPackages($litstack)
     {
-        $this->updateNodePackages(function ($packages) {
+        $this->updateNodePackages(function ($packages) use ($litstack) {
+            if ($litstack) {
+                $packages = array_merge(
+                    $packages,
+                    [
+                        '@aw-studio/vue-lit-block'      => '^1.0',
+                        '@aw-studio/vue-lit-image-next' => '^1.0',
+                    ]
+                );
+            }
+
             return [
                 '@macramejs/macrame-vue3' => '^0.0.1',
                 '@inertiajs/inertia'      => '^0.10.0',
