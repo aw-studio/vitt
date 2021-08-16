@@ -68,6 +68,26 @@ class InstallCommand extends Command
         $this->callSilently('inertia:middleware');
 
         $this->comment("\nPlease execute 'npm install & npm run dev'.\n");
+
+        // handle litstack preset files
+        if ($litstack) {
+            $this->handleLitstackFiles();
+            $this->comment("\nPlease install litstack bladesmith'.\n");
+        }
+    }
+
+    /**
+     * Handle Blade files.
+     *
+     * @return void
+     */
+    public function handleLitstackFiles()
+    {
+        $this->callSilently('vendor:publish', ['--tag' => 'vitt-blade', '--force' => true]);
+
+        if (File::exists(resource_path('views/welcome.blade.php'))) {
+            File::delete(resource_path('views/welcome.blade.php'));
+        }
     }
 
     /**
@@ -144,6 +164,7 @@ mix.browserSync({
                     [
                         '@aw-studio/vue-lit-block'      => '^1.0',
                         '@aw-studio/vue-lit-image-next' => '^1.0',
+                        '@headlessui/vue'               => '^1.4.0',
                     ]
                 );
             }

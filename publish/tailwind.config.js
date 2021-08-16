@@ -9,10 +9,10 @@ module.exports = {
     theme: {
         borderRadius: {
             full: '9999px',
-            lg: '19px',
-            md: '15px',
-            sm: '11px',
             xs: '6px',
+            sm: '11px',
+            md: '15px',
+            lg: '19px',
         },
         colors: {
             white: 'white',
@@ -89,11 +89,6 @@ module.exports = {
         },
         boxShadow: {
             DEFAULT: '0px 0px 19px 0px rgba(0,0,0,0.08)',
-        },
-        extend: {
-            gridTemplateColumns: {
-                app: '300px 1fr',
-            },
         },
     },
 };
