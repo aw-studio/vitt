@@ -49,20 +49,6 @@ class VittServiceProvider extends ServiceProvider
             __DIR__ . '/../publish/Http/Controllers/HomeController.php' => app_path('Http/Controllers/Pages/HomeController.php'),
             __DIR__ . '/../publish/routes/web.php'                      => base_path('routes/web.php'),
         ], 'vitt-controllers');
-
-        $this->publishes([
-            __DIR__ . '/../publish/presets/litstack/Http/Controllers/MasterController.php'         => app_path('Http/Controllers/Pages/MasterController.php'),
-            __DIR__ . '/../publish/presets/litstack/Http/Middleware/HandleInertiaRequests.php'     => app_path('Http/Middleware/HandleInertiaRequests.php'),
-            __DIR__ . '/../publish/presets/litstack/Http/Resources/LitNavigationResource.php'      => app_path('Http/Resources/LitNavigationResource.php'),
-            __DIR__ . '/../publish/presets/litstack/Http/Kernel.php'                               => app_path('Http/Kernel.php'),
-            __DIR__ . '/../publish/presets/litstack/lit/app/Config/Form'                           => base_path('lit/app/Config/Form'),
-            __DIR__ . '/../publish/presets/litstack/lit/app/Config/NavigationConfig.php'           => base_path('lit/app/Config/NavigationConfig.php'),
-            __DIR__ . '/../publish/presets/litstack/lit/app/Http/Controllers/Form'                 => base_path('lit/app/Http/Controllers/Form'),
-            __DIR__ . '/../publish/presets/litstack/lit/app/Macros'                                => base_path('lit/app/Macros'),
-            __DIR__ . '/../publish/presets/litstack/lit/app/Providers/LitstackServiceProvider.php' => base_path('lit/app/Providers/LitstackServiceProvider.php'),
-            __DIR__ . '/../publish/presets/litstack/resources/js'                                  => resource_path('js'),
-            __DIR__ . '/../publish/presets/litstack/routes/web.php'                                => base_path('routes/web.php'),
-        ], 'vitt-litstack');
     }
 
     /**

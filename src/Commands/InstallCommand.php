@@ -44,16 +44,11 @@ class InstallCommand extends Command
         $this->info('| |/ // /  / /   / /    ');
         $this->info('|___/___/ /_/   /_/     ');
 
-        $litstack = false;
-        if ($this->confirm('Install litstack preset?')) {
-            $litstack = true;
-        }
-
         // Delete welcome view and replace with app
         $this->handleBladeFiles();
 
         // Publish js and css resources
-        $this->handleAssetFiles($litstack);
+        $this->handleAssetFiles();
 
         // publish root dir config files
         $this->handleRootFiles();
@@ -62,18 +57,12 @@ class InstallCommand extends Command
         $this->handleControllers();
 
         // update package.json
-        $this->installNpmPackages($litstack);
+        $this->installNpmPackages();
 
         // install inertia middleware
-        $this->callSilently('inertia:middleware');
+        $this->installInertia();
 
-        $this->comment("\nPlease execute 'npm install & npm run dev'.\n");
-
-        // handle litstack preset files
-        if ($litstack) {
-            $this->handleLitstackFiles();
-            $this->comment("\nPlease install litstack bladesmith'.\n");
-        }
+        $this->comment("\nPlease execute 'npm install && npm run dev'.\n");
     }
 
     /**
@@ -141,22 +130,10 @@ mix.browserSync({
      *
      * @return void
      */
-    public function installNpmPackages($litstack)
+    public function installNpmPackages()
     {
-        $this->updateNodePackages(function ($packages) use ($litstack) {
-            if ($litstack) {
-                $packages = array_merge(
-                    $packages,
-                    [
-                        '@aw-studio/vue-lit-block'      => '^1.0',
-                        '@aw-studio/vue-lit-image-next' => '^1.0',
-                        '@headlessui/vue'               => '^1.4.0',
-                    ]
-                );
-            }
-
+        $this->updateNodePackages(function ($packages) {
             return [
-                '@macramejs/macrame-vue3' => '^0.0.1',
                 '@inertiajs/inertia'      => '^0.10.0',
                 '@inertiajs/inertia-vue3' => '^0.5.1',
                 '@vue/compiler-sfc'       => '^3.1.5',
@@ -169,14 +146,30 @@ mix.browserSync({
         });
     }
 
-    /**
-     * Handle Litstack files.
-     *
-     * @return void
-     */
-    public function handleLitstackFiles()
+    public function installInertia()
     {
-        $this->callSilently('vendor:publish', ['--tag' => 'vitt-litstack', '--force' => true]);
+        $this->callSilently('inertia:middleware');
+
+        $kernel = app_path('Http/Kernel.php');
+        if (file_exists($kernel)) {
+            $find = "\Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ],
+
+        'api' => [";
+            $replace = "\Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\HandleInertiaRequests::class,
+        ],
+
+        'api' => [";
+
+            $file_contents = file_get_contents($kernel);
+            $file_contents = str_replace(
+                $find,
+                $replace,
+                $file_contents
+            );
+            file_put_contents($kernel, $file_contents);
+        }
     }
 
     /**
