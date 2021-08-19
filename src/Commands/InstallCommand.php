@@ -136,6 +136,7 @@ mix.browserSync({
             return [
                 '@inertiajs/inertia'      => '^0.10.0',
                 '@inertiajs/inertia-vue3' => '^0.5.1',
+                '@tailwindcss/typography' => '^0.4.1',
                 '@vue/compiler-sfc'       => '^3.1.5',
                 'tailwindcss'             => '^2.2.7',
                 'ts-loader'               => '^9.2.4',

@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
     // mode: 'jit',
     variants: {
@@ -89,9 +91,49 @@ module.exports = {
             base: ['14px', '24px'],
             lg: ['16px', '24px'],
             xl: ['25px', '33px'],
+            '2xl': ['28px', '38px'],
         },
         boxShadow: {
             DEFAULT: '0px 0px 19px 0px rgba(0,0,0,0.08)',
         },
+        extend: {
+            typography: theme => ({
+                DEFAULT: {
+                    css: {
+                        color: theme('colors.gray.700'),
+                        h2: {
+                            color: theme('colors.gray.800'),
+                        },
+                        h3: {
+                            color: theme('colors.gray.800'),
+                        },
+                        strong: {
+                            color: theme('colors.gray.800'),
+                        },
+                        a: {
+                            color: theme('colors.green.500'),
+                            '&:hover': {
+                                color: theme('colors.green.600'),
+                            },
+                        },
+                        ul: {
+                            'list-style-type': 'none',
+                        },
+                    },
+                },
+            }),
+        },
     },
+    plugins: [
+        plugin(function ({ addBase, theme }) {
+            addBase({
+                h1: { fontSize: theme('fontSize.2xl') },
+                h2: { fontSize: theme('fontSize.xl') },
+                h3: { fontSize: theme('fontSize.lg') },
+            });
+        }),
+        require('@tailwindcss/typography')({
+            modifiers: ['sm', 'lg'],
+        }),
+    ],
 };
