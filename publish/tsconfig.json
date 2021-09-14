@@ -8,6 +8,7 @@
     "moduleResolution": "node"
   },
   "include": ["resources/js/**/*"],
+  "exclude": ["./node_modules"],
   "files": [
     "shims-vue.d.ts"
   ]
