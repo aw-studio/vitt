@@ -11,7 +11,16 @@ VITT the AW-Studio project bootstrapper for Laravel applications including
 
 ```bash
 composer require aw-studio/vitt
+```
+
+```bash
 php artisan vitt:install
+```
+
+```bash
 npm install
+```
+
+```bash
 npm run dev
 ```
