@@ -15,8 +15,3 @@ php artisan vitt:install
 npm install
 npm run dev
 ```
-
-## Enable SSR
-```bash
-node server.js
-```

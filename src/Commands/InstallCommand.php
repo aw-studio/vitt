@@ -134,15 +134,14 @@ mix.browserSync({
     {
         $this->updateNodePackages(function ($packages) {
             return [
-                '@inertiajs/inertia'      => '^0.10.0',
-                '@inertiajs/inertia-vue3' => '^0.5.1',
-                '@tailwindcss/typography' => '^0.4.1',
-                '@vue/compiler-sfc'       => '^3.1.5',
-                'tailwindcss'             => '^2.2.7',
-                'ts-loader'               => '^9.2.4',
-                'typescript'              => '^4.3.5',
-                'vue'                     => '^3.1.5',
-                'vue-loader'              => '^16.4.1',
+                '@inertiajs/inertia'      => '^0.10.1',
+                '@inertiajs/inertia-vue3' => '^0.5.2',
+                '@vue/compiler-sfc'       => '^3.2.24',
+                'tailwindcss'             => '^2.2.19',
+                'ts-loader'               => '^9.2.6',
+                'typescript'              => '^4.5.2',
+                'vue'                     => '^3.2.24',
+                'vue-loader'              => '^16.8.3',
             ] + $packages;
         });
     }

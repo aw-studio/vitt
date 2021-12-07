@@ -8,8 +8,6 @@ class HomeController
 {
     public function __invoke()
     {
-        return Inertia::render('Home/Home', [
-            'message' => 'VITT',
-        ]);
+        return Inertia::render('Home/Home');
     }
 }

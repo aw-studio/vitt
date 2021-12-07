@@ -11,6 +11,7 @@ module.exports = {
     theme: {
         container: {
             center: true,
+            padding: '20px',
         },
         borderRadius: {
             xs: '6px',
@@ -21,6 +22,7 @@ module.exports = {
         },
         colors: {
             white: 'white',
+            white: 'black',
             blue: {
                 100: '#EDF2FF',
                 200: '#D4E0FF',
@@ -96,44 +98,72 @@ module.exports = {
         boxShadow: {
             DEFAULT: '0px 0px 19px 0px rgba(0,0,0,0.08)',
         },
-        extend: {
-            typography: theme => ({
-                DEFAULT: {
-                    css: {
-                        color: theme('colors.gray.700'),
-                        h2: {
-                            color: theme('colors.gray.800'),
-                        },
-                        h3: {
-                            color: theme('colors.gray.800'),
-                        },
-                        strong: {
-                            color: theme('colors.gray.800'),
-                        },
-                        a: {
-                            color: theme('colors.green.500'),
-                            '&:hover': {
-                                color: theme('colors.green.600'),
-                            },
-                        },
-                        ul: {
-                            'list-style-type': 'none',
-                        },
-                    },
-                },
-            }),
-        },
+        extend: {},
     },
     plugins: [
-        plugin(function ({ addBase, theme }) {
+        plugin(function ({ addBase }) {
             addBase({
-                h1: { fontSize: theme('fontSize.2xl') },
-                h2: { fontSize: theme('fontSize.xl') },
-                h3: { fontSize: theme('fontSize.lg') },
+                body: {
+                    fontFamily: ['Ubuntu'],
+                    '@apply text-blue text-base antialiased': {},
+                },
+                'h1, h2, h3, h4, p, ol, ul, .h1, .h2, .h3, .h4, blockquote': {
+                    maxWidth: '630px',
+                    '@apply mb-8': {},
+                },
+                'p + h1, p + h2, p + h3, p + h4': {
+                    '@apply pt-8': {},
+                },
+                'h1, .h1': {
+                    '@apply text-xl lg:text-2xl font-semibold': {},
+                },
+                'h2, .h2': {
+                    paddingRight: '10%',
+                    '@apply text-lg lg:text-xl font-semibold': {},
+                },
+                'h3, .h3': {
+                    paddingRight: '10%',
+                    '@apply text-base lg:text-lg font-semibold': {},
+                },
+                'h4, .h4': {
+                    '@apply text-base font-semibold': {},
+                },
+                'main a': {},
+                'main ol': {
+                    listStyle: 'none',
+                    counterReset: 'li',
+                },
+                'main ul': {
+                    listStyle: 'none',
+                },
+                'main ol, main ul': {
+                    position: 'relative',
+                    paddingLeft: '35px',
+                },
+                'main ol>li::before': {
+                    content: 'counter(li)',
+                },
+                'main ul>li::before': {
+                    content: '"•"',
+                },
+                'main li::before': {},
+                'main ol li': {
+                    counterIncrement: 'li',
+                },
+                'main li': {
+                    '@apply pb-4': {},
+                },
+                'main li *': {
+                    '@apply pb-0 mb-0': {},
+                },
+
+                blockquote: {
+                    '@apply pb-8': {},
+                },
+                '.container .container': {
+                    '@apply px-0': {},
+                },
             });
-        }),
-        require('@tailwindcss/typography')({
-            modifiers: ['sm', 'lg'],
         }),
     ],
 };
